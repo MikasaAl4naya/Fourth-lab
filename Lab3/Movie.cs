@@ -7,26 +7,70 @@ using System.Threading.Tasks;
 namespace Lab3
 {
     //Общий класс
-   public class Movie
+    public class Movie
     {
         public static Random rnd = new Random();//Поле для рандомного заполнения
         public int Rating = 0;//Общее свойство для всех классов
+        public string name;
         public virtual string GetInfo()//virtual нужен для того, чтобы можно было переопределить функцию
         {                              //в классах наследниках
+
             var str = String.Format("\n Рейтинг: {0}", this.Rating);
             return str;
         }
+        public static string RandomName(int random)
+        {
+            string str = "";
+            var rnd = new Random();
+            {
+                switch (random)
+                {
+                    case 0:
+                        str = "Побег из Шоушенка";
+                        break;
+                    case 1:
+                        str = "Властелин колец";
+                        break;
+                    case 2:
+                        str = "Фанатик";
+                        break;
+                    case 3:
+                        str = "Остаться в живых";
+                        break;
+                    case 4:
+                        str = "Сверхъествественное";
+                        break;
+                    case 5:
+                        str = "Теория большого взрыва";
+                        break;
+                    case 6:
+                        str = "Поле чудес";
+                        break;
+                    case 7:
+                        str = "Вечерний Ургант";
+                        break;
+                    case 8:
+                        str = "ЧТО БЫЛО ДАЛЬШЕ";
+                        break;
+                }
+            }
+            return str;
+        }
     }
-    public enum Filmtype { art,documentary,scientific}
+
     class Film : Movie
     {
+        public enum Filmtype { art, documentary, scientific }
+        public enum Filmname { Deadpool,Intochables, Ted }
         public Filmtype kinds = Filmtype.art;
+        public Filmname Filmnames = Filmname.Deadpool;
         public int timing;
         public int awards;
         public override string GetInfo()
         {
             var str = "Фильм";
             str += base.GetInfo();
+            str += String.Format("\n Название:{0}", this.name);
             str += String.Format("\n Тип фильма:{0}", this.kinds);
             str += String.Format("\n Xронометраж:{0}", this.timing);
             str += String.Format("\n Количество наград:{0}", this.awards);
@@ -36,11 +80,11 @@ namespace Lab3
             {
             return new Film
             {
-                Rating = rnd.Next() % 10,
+                    Rating = rnd.Next() % 10,
                     timing = rnd.Next() % 300,
                     awards = rnd.Next() % 4,
-                    kinds = (Filmtype)rnd.Next(3)
-                };
+                    name = RandomName(rnd.Next(0, 2))
+            };
             }
     }
 
@@ -52,6 +96,7 @@ namespace Lab3
         {
             var str = "Сериал";
             str += base.GetInfo();
+            str += String.Format("\n Название:{0}", this.name);
             str += String.Format("\n Кол-во серий:{0}", this.series);
             str += String.Format("\n Кол-во сезонов:{0}", this.seasons);
             return str;
@@ -63,6 +108,7 @@ namespace Lab3
                 Rating = rnd.Next() % 10,
                 series = rnd.Next() % 23,
                 seasons = rnd.Next() % 10,
+                name = RandomName(rnd.Next(3, 5))
             };
         }
     }
@@ -74,6 +120,7 @@ namespace Lab3
         {
             var str = "Телепередача";
             str += base.GetInfo();
+            str += String.Format("\n Название:{0}", this.name);
             str += String.Format("\n Продолжительность:{0}", this.timing);
             str += String.Format("\n Эфирное время:{0}", this.airtime[0]);
             str += String.Format(":{0}", this.airtime[1]);
@@ -86,7 +133,12 @@ namespace Lab3
                 Rating = rnd.Next() % 10,
                 timing = rnd.Next() % 90,
                 airtime = new int[2] { rnd.Next() % 24, rnd.Next() % 60 },
+                name=RandomName(rnd.Next(6,8))
             };
         }
+        
+        }
+
     }
-}
+
+

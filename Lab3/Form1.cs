@@ -129,6 +129,12 @@ namespace Lab3
             ShowInfo();
             MovieList();   
     }
+
+        private void ButtonInfo_Click(object sender, EventArgs e)
+        {
+            Form2 form = new Form2();
+            form.Show();
+        }
     }
 }
     

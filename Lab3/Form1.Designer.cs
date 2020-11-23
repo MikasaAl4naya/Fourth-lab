@@ -59,6 +59,7 @@
             this.ButtonInfo.TabIndex = 17;
             this.ButtonInfo.Text = "Справка";
             this.ButtonInfo.UseVisualStyleBackColor = false;
+            this.ButtonInfo.Click += new System.EventHandler(this.ButtonInfo_Click);
             // 
             // label3
             // 
